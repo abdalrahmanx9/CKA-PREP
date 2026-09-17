@@ -8,13 +8,13 @@ SERVICE="cri-docker"
 echo "Validating cri-dockerd setup..."
 
 # 1. Package installed
-dpkg -l | grep -qw "$PACKAGE" \
+dpkg -l | grep -w "$PACKAGE" >/dev/null \
   || { echo "FAIL: Package $PACKAGE is not installed"; exit 1; }
 
 echo "✓ cri-dockerd package installed"
 
 # 2. Service exists
-systemctl list-unit-files | grep -qw "$SERVICE.service" \
+systemctl list-unit-files | grep -w "$SERVICE.service" >/dev/null \
   || { echo "FAIL: Service $SERVICE.service not found"; exit 1; }
 
 echo "✓ cri-docker service exists"
