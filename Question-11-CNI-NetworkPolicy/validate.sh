@@ -35,6 +35,8 @@ if [ -n "$CALICO_NS" ]; then
   fi
 elif [ "$CILIUM_DS" -gt 0 ] 2>/dev/null; then
   echo "PASS: cilium is installed (supports NetworkPolicies)"
+  echo "NOTE: cilium came preinstalled on this playground - there was nothing to install here."
+  echo "      Practice the actual install (calico) on a clean cluster without a CNI."
   kubectl -n kube-system get pods -l k8s-app=cilium | tail -n +2
 else
   echo "FAIL: no NetworkPolicy-capable CNI found (calico or cilium)"
