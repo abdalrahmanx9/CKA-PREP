@@ -5,7 +5,7 @@ There is a service called nginx-service in the nginx-static namespace that is cu
 
 Task:
 1. Configure the ConfigMap to only support TLSv1.3
-2. Add the IP address of the service in /etc/hosts and name it ckaquestion.k8s.local
+2. Add the IP address of the service to /etc/hosts and name it ckaquestion.k8s.local
 3. Verify everything is working using the following commands
     curl -vk --tls-max 1.2 https://ckaquestion.k8s.local # should fail
     curl -vk --tlsv1.3 https://ckaquestion.k8s.local # should work

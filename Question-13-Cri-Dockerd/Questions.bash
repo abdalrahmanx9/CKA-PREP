@@ -2,7 +2,7 @@ Question: Cri-Dockerd
 
 Task:
 Set up cri-dockerd
-Install the debian package ~/cri-dockerd.deb using dpkg
+Install the Debian package ~/cri-dockerd.deb using dpkg
 Enable and start the cri-docker service
 Configure these parameters:
 1. Set net.bridge.bridge-nf-call-iptables to 1

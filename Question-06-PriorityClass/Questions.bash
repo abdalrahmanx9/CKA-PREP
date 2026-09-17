@@ -1,6 +1,6 @@
 Question
-You're working in a kubernetes cluster with an existing deployment named busybox-logger running in the priority namespace.
-The cluster already has at least one user defined Priority Class
+You're working in a Kubernetes cluster with an existing deployment named busybox-logger running in the priority namespace.
+The cluster already has at least one user-defined Priority Class
 
 Tasks:
 1. Create a new Priority Class named high-priority for user workloads. The value of this class should be exactly one less than the highest existing user-defined priority class
