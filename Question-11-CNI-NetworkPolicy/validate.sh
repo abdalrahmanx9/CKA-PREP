@@ -5,7 +5,7 @@ echo "Starting CNI validation..."
 
 # -------------------------------------------------
 # 1. A CNI that supports Network Policies must be installed
-#    (Calico = calico/tigera pods, NOT plain flannel)
+#    (Calico = calico-node pods in kube-system, NOT plain flannel)
 # -------------------------------------------------
 echo "Checking for a CNI with NetworkPolicy support..."
 
@@ -14,10 +14,10 @@ if kubectl get ds -n kube-system 2>/dev/null | grep -q kube-flannel; then
   exit 1
 fi
 
-if kubectl get pods -n calico-system 2>/dev/null | grep -q calico-node; then
+if kubectl get pods -n kube-system 2>/dev/null | grep -q calico-node; then
   echo "PASS: calico is installed"
 else
-  echo "FAIL: no calico pods found in calico-system (did you install a CNI?)"
+  echo "FAIL: no calico pods found in kube-system (did you install a CNI?)"
   exit 1
 fi
 
@@ -25,13 +25,13 @@ fi
 # 2. calico-node DaemonSet pods must be Ready
 # -------------------------------------------------
 echo "Checking calico-node DaemonSet..."
-READY=$(kubectl get ds -n calico-system calico-node -o jsonpath='{.status.numberReady}')
-DESIRED=$(kubectl get ds -n calico-system calico-node -o jsonpath='{.status.desiredNumberScheduled}')
+READY=$(kubectl get ds -n kube-system calico-node -o jsonpath='{.status.numberReady}')
+DESIRED=$(kubectl get ds -n kube-system calico-node -o jsonpath='{.status.desiredNumberScheduled}')
 if [ -n "$READY" ] && [ "$READY" = "$DESIRED" ] && [ "$READY" -gt 0 ] 2>/dev/null; then
   echo "PASS: calico-node $READY/$DESIRED pods ready"
 else
   echo "FAIL: calico-node $READY/$DESIRED ready"
-  kubectl get pods -n calico-system
+  kubectl get pods -n kube-system
   exit 1
 fi
 
@@ -39,7 +39,7 @@ fi
 # 3. Pods must actually get IP addresses (CNI is functional)
 # -------------------------------------------------
 echo "Checking that pods receive IP addresses..."
-IP=$(kubectl get pods -n calico-system -o jsonpath='{.items[0].status.podIP}')
+IP=$(kubectl get pods -n kube-system -o jsonpath='{.items[0].status.podIP}')
 if [ -n "$IP" ]; then
   echo "PASS: pods have IPs (e.g. $IP)"
 else
@@ -67,3 +67,4 @@ echo "PASS: NetworkPolicy created and deleted successfully"
 
 echo
 echo "SUCCESS: CNI is installed and supports Network Policies"
+

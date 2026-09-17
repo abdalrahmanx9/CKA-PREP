@@ -6,7 +6,7 @@ Flannel (v0.26.1) using the manifest kube-flannel.yml (https://github.com/flanne
 
 or
 
-Calico (v3.28.2) using the manifest tigera-operator.yaml (https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/tigera-operator.yaml)
+Calico (v3.28.2) using the manifest calico.yaml (https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/calico.yaml)
 
 The CNI you choose must
 1. Let pods communicate with each other
@@ -15,3 +15,5 @@ The CNI you choose must
 
 Video Link
 https://youtu.be/SV3V5VwR2sk?si=47uiyuvMD1Vpqbm1
+
+
