@@ -12,10 +12,11 @@ curl -sL https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifest
 
 # Step 2
 # We need to apply the Calico file
-k create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/calico.yaml
+kubectl apply -f /root/calico.yaml
 
 # Step 3 check everything has been deployed
 k get pods -n kube-system | grep calico
 # We should see pods, deployments and replicasets
+
 
 

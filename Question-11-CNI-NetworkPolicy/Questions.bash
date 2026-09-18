@@ -6,7 +6,7 @@ Flannel (v0.26.1) using the manifest kube-flannel.yml (https://github.com/flanne
 
 or
 
-Calico (v3.28.2) using the manifest calico.yaml (https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/calico.yaml)
+Calico (v3.28.2) using the manifest calico.yaml (https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/calico.yaml) - already downloaded to /root/calico.yaml with the IP pool matching this cluster
 
 The CNI you choose must:
 1. Let pods communicate with each other
