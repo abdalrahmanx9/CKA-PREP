@@ -20,3 +20,7 @@ k get pods -n kube-system | grep calico
 
 
 
+
+# If calico-node pods stay not-ready (IPIP blocked between nodes), switch the pool to VXLAN:
+kubectl patch ippool default-ipv4-ippool --type=merge -p '{""spec"":{""ipipMode"":""Never"",""vxlanMode"":""Always""}}'
+kubectl -n kube-system delete pod -l k8s-app=calico-node
