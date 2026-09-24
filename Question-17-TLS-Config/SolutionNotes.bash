@@ -1,6 +1,12 @@
 # Step one
-# We want to edit the config map to remove all references to tls v1.2
-k edit cm -n nginx-static nginx-config # remove TLSv1.2 from SSL protocols (remove from last applied configuration for safety)
+# We want the ConfigMap to only support TLSv1.3 AND be immutable
+# Gotcha: an existing ConfigMap can NOT be edited to become immutable - you must recreate it
+k get cm -n nginx-static nginx-config -o yaml > cm.yaml
+vi cm.yaml
+# - remove TLSv1.2 from ssl_protocols
+# - add: immutable: true  (in the metadata section)
+k delete cm -n nginx-static nginx-config
+k apply -f cm.yaml
 
 # Step 2
 # We need to get the IP of the service

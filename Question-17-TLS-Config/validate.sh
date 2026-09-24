@@ -6,6 +6,18 @@ URL="https://ckaquestion.k8s.local"
 echo "Starting TLS validation..."
 
 # -------------------------------------------------
+# 0. ConfigMap must be immutable
+# -------------------------------------------------
+echo "Checking ConfigMap is immutable..."
+IMMUTABLE=$(kubectl -n nginx-static get cm nginx-config -o jsonpath='{.immutable}')
+if [ "$IMMUTABLE" = "true" ]; then
+  echo "PASS: ConfigMap is immutable"
+else
+  echo "FAIL: ConfigMap is not immutable (immutable=$IMMUTABLE)"
+  exit 1
+fi
+
+# -------------------------------------------------
 # 1. TLS 1.2 must FAIL
 # -------------------------------------------------
 echo "Checking TLS 1.2 (should fail)..."
