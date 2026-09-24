@@ -3,6 +3,7 @@ Install and configure a CNI of your choice that meets the specified requirements
 Choose one of the following:
 
 Flannel (v0.26.1) using the manifest kube-flannel.yml (https://github.com/flannel-io/flannel/releases/download/v0.26.1/kube-flannel.yml)
+Flannel install steps: https://github.com/flannel-io/flannel/blob/master/README.md
 
 or
 
